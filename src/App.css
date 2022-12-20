@@ -1,39 +1,259 @@
+:root {
+    --nav-width: 250px;
+    --trans-color: hsla(0, 0%, 9%, 0.74);
+    --bg-color: #FAF8F1;
+    --text-color: #181818;
+    --yellow-color: #fbc02d;
+    --nav-logo-size: 25px;
+    --nav-logo-padding: 5px;
+}
+
+
 .App {
-  text-align: center;
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: .5s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App.dark-mode {
+    --bg-color: #181818;
+    --text-color: #FAF8F1;
+    --trans-color: hsla(49, 85%, 97%, 0.13);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+
+
+
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+
+.item-link:hover {
+    text-decoration: underline;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+
+.main {
+    margin-left: var(--nav-width);
+    padding: 20px 25px;  
+    background-color: var(--bg-color);
+    min-height: 100%;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+
+.loader-container {
+    text-align: center;
 }
+
+
+
+.search {
+    color: white;
+}
+
+/* Navbar */
+
+
+
+.nav-logo {
+    text-align: center;
+    font-size: var(--nav-logo-size);
+    font-weight: 800;
+    background-color: #1976d2;
+    margin-bottom: 15px;
+    padding: var(--nav-logo-padding) 0;    
+}
+
+
+
+.nav-logo a {
+    color: var(--yellow-color);
+}
+
+
+.nav-container{
+    background-color: var(--bg-color);
+    position: fixed;
+    width: var(--nav-width);
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 5px 0.5px hsl(0, 0%, 0%, 0.5);
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+}
+
+
+.nav {
+    margin: 0 5%;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.nav-list-item {
+    list-style: none;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px 0 ;
+    text-align: center;
+    border-radius: 10px;
+    margin: 5px 10%;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.nav-footer-container {
+    margin: 0 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.switch-color {
+    width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.mode-icons {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.moon-sun {
+    position: absolute;
+    transition: .3;
+}
+
+.sun {
+    opacity: 0;
+}
+
+.dark-mode .sun {
+    opacity: 1;
+}
+
+.dark-mode .moon {
+    opacity: 0;
+}
+
+/* ==================== */
+
+
+/* MAIN PAGE */
+
+.wrapper {
+    height: 100%;
+    margin-left: var(--nav-width);
+}
+
+.main-page {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+
+
+
+.main-title {
+    color: var(--yellow-color)
+}
+
+
+/* ====================== */
+
+
+/* Pagination */
+
+.pagination {
+    margin: 10px 0;
+}
+
+.pagination-page {
+    padding: 10px;
+    border: 2px solid var(--text-color);
+    cursor: pointer;
+    transition: .6s ease-out;
+}
+
+.pagination-page:not(:last-child) {
+    border-right: none;
+}
+
+.pagination-page-active {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* =================== */
+
+.long-menu {
+    display: none;
+}
+
+
+
+@media screen and (max-width: 800px) {
+    .nav-container {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-logo {
+        margin-bottom: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .color-text {
+        display: none;
+    }
+    .nav {
+        display: none;
+    }
+
+    .nav-container {
+        padding-right: 20px;
+    }
+
+    .nav-footer-container {
+        display: flex;
+        gap: 15px;
+    }
+
+    .wrapper, .main {
+        margin-left: 0;
+        padding-top: calc(var(--nav-logo-padding) * 2 + var(--nav-logo-size) * 2  + 25px);
+        
+    }
+
+    .long-menu {
+        display: block;
+    }
+} 

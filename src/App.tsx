@@ -1,57 +1,74 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useState } from 'react';
 import './App.css';
+import AppRouter from './components/AppRouter';
+import Navbar from './components/Navbar';
+import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
+import { amber, deepOrange, grey, blue } from '@mui/material/colors';
+import { PaletteMode } from '@mui/material';
+
+
+
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+const getDesignTokens = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+          primary: {
+            main: "#1976d2"
+          },
+          text: {
+            primary: grey[900],
+            secondary: grey[800],
+          },
+        }
+      : {
+          primary: {
+            main: "#1976d2"
+          },
+          text: {
+            primary: grey[100],
+            secondary: grey[500],
+          },
+        }),
+  },
+});
+
+
+
 
 function App() {
+
+
+  const [mode, setMode] = React.useState<'light' | 'dark'>('light');
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme(getDesignTokens(mode)),
+    [mode],
+  );
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+    
+      <div className={`App ${mode === "dark" ? "dark-mode": ""} `}>
+        <ThemeProvider theme={theme}>
+        <Navbar />
+        <AppRouter />
+        </ThemeProvider>
+      </div>
+    </ColorModeContext.Provider>
+
   );
 }
 
