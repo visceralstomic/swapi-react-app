@@ -9,8 +9,8 @@ import DetailItemCell from "../components/DetailItemCell";
 const PlanetDetailPage: React.FC = () => {
     const {data, loading, error} = useAppSelector(state => state.planetDetail);
 
-    const people = data?.additional_info.people;
-    const films = data?.additional_info.films;
+    const people = data?.additional_info?.people;
+    const films = data?.additional_info?.films;
     
     return (
         <Main>

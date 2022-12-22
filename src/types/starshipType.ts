@@ -26,7 +26,7 @@ export interface StarshipType {
     films: string[],
     pilots: string[],
     url: string,
-    additional_info: AddStarshipInfoType
+    additional_info?: AddStarshipInfoType
 }
 
 

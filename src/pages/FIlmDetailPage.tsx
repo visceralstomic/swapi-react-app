@@ -11,11 +11,11 @@ import DetailItemCell from "../components/DetailItemCell";
 const FilmDetailPage = () => {
    const {data, error, loading} = useAppSelector(state => state.filmDetail);
 
-   const characters = data?.additional_info.characters;
-   const planets = data?.additional_info.planets;
-   const starships = data?.additional_info.starships;
-   const vehicles = data?.additional_info.vehicles;
-   const species = data?.additional_info.species;
+   const characters = data?.additional_info?.characters;
+   const planets = data?.additional_info?.planets;
+   const starships = data?.additional_info?.starships;
+   const vehicles = data?.additional_info?.vehicles;
+   const species = data?.additional_info?.species;
 
 
    return (

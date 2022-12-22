@@ -23,7 +23,7 @@ export interface VehicleType {
     films: string[],
     pilots: string[],
     url: string,
-    additional_info: AddVehicleInfoType
+    additional_info?: AddVehicleInfoType
 }
 
 export type VehicleStateType = StateType<VehicleType>;

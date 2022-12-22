@@ -1,10 +1,10 @@
 
-import {call, fork, put,  takeEvery} from "redux-saga/effects";
+import {call, fork, put,  SagaReturnType,  select,  takeEvery} from "redux-saga/effects";
 import {  PEOPLE_DETAIL_ROUTE, PEOPLE_ROUTE } from "../../components/AppRouter";
 import filmService from "../../services/filmService";
 import peopleService from "../../services/peopleService";
 import planetsService from "../../services/planetsService";
-import { PeopleAddInfoType } from "../../types/peopleType";
+import { PeopleAddInfoType, PeopleState } from "../../types/peopleType";
 import getIdFromUrl from "../../utils/getIdFromUrl";
 import { fetchPeopleDetail, fetchPeopleDetailFailure, 
     fetchPeopleDetailSuccess } from "../store/reducers/peopleDetailReducer";
@@ -20,10 +20,12 @@ import { sagaPeopleDetailType, sagaPeopleType,
     sagaPlanetDetailFetchType, SagaWorkerDetailPayload, SagaWorkerPayload } from "../../types/sagaType";
 import getItemList from "../../utils/getItemList";
 import genFactory from "../../utils/genFactory";
+import { RootState } from "../store/store";
+import { AllStateTypes } from "../../types/common";
 
 
 
-function* fetchPeopleWorker({payload}: SagaWorkerPayload) {
+export function* fetchPeopleWorker({payload}: SagaWorkerPayload) {
     try {
         const {page, search} = payload;
         const data: sagaPeopleType = yield call(peopleService.getAllPeople, page, search);
@@ -35,7 +37,7 @@ function* fetchPeopleWorker({payload}: SagaWorkerPayload) {
 
 
 
-function* fetchPeopleDetailWorker({payload}: SagaWorkerDetailPayload) {
+export function* fetchPeopleDetailWorker({payload}: SagaWorkerDetailPayload) {
     const {id} = payload;
 
     try {
@@ -58,15 +60,31 @@ function* fetchPeopleDetailWorker({payload}: SagaWorkerDetailPayload) {
         yield put(fetchPeopleDetailSuccess({...data, additional_info}));
         
     } catch (e: any) {
+        console.log(e)
         yield put(fetchPeopleDetailFailure(e.message));
     }
-}
+
+
+
+}type selectState = (state: RootState) => AllStateTypes;
+
+export const getState: selectState = state => state.people
+
+export const fetchPeopleRouteWorker = genFactory(PEOPLE_ROUTE,PEOPLE_DETAIL_ROUTE, getState, 
+    fetchPeople, fetchPeopleDetail );
 
 
 
 export function* fetchPeopleWatcher() {
-    yield fork(genFactory(PEOPLE_ROUTE,PEOPLE_DETAIL_ROUTE, state => state.people, 
-        fetchPeople, fetchPeopleDetail ));
+    yield fork(fetchPeopleRouteWorker);
     yield takeEvery(fetchPeopleDetail.type, fetchPeopleDetailWorker);
     yield takeEvery(fetchPeople.type, fetchPeopleWorker );
+}
+
+
+
+
+export function* getPeopleSelectWorker() {
+    const data:  SagaReturnType<typeof getState> = yield select(getState);
+    console.log(data)
 }

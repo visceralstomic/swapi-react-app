@@ -1,4 +1,4 @@
-import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { ListItemButton, ListItemText } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import { PeopleType } from "../types/peopleType";
@@ -21,8 +21,6 @@ const PeopleItem: React.FC<PeopleItemProps> = ({peopleItem}) => {
             component={Link} to={`/people/${id}`}
             color="secondary"
         >
-            
-
             <ListItemText 
                 primary={peopleItem.name} 
                 secondary={`Gender: ${peopleItem.gender} | Birth year: ${peopleItem.birth_year}`}

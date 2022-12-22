@@ -20,7 +20,7 @@ const SpecieItem: React.FC<SpecieItemProps> = ({specie}) => {
         >
             <ListItemText 
                 primary={specie.name} 
-                secondary={`Classification: ${specie.classification} | Homeworld: ${specie.homeworld} `}
+                secondary={`Classification: ${specie.classification} | Language: ${specie.language} `}
             />
         </ListItemButton>
 

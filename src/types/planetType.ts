@@ -23,7 +23,7 @@ export interface PlanetType {
     residents: string[],
     films: string[],
     url: string,
-    additional_info: PlanetAddInfoType
+    additional_info?: PlanetAddInfoType
 }
 
 

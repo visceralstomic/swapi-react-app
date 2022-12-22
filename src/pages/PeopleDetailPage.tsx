@@ -18,11 +18,11 @@ interface PeopleDetailPageCompProps {
 
 
 const PeopleDetailPageComp: React.FC<PeopleDetailPageCompProps> = ({peopleItem}) => {
-    const home = peopleItem?.additional_info.home;
-    const films = peopleItem?.additional_info.films;
-    const vehicles = peopleItem?.additional_info.vehicles;
-    const starships = peopleItem?.additional_info.starships;
-    const species = peopleItem?.additional_info.species;
+    const home = peopleItem?.additional_info?.home;
+    const films = peopleItem?.additional_info?.films;
+    const vehicles = peopleItem?.additional_info?.vehicles;
+    const starships = peopleItem?.additional_info?.starships;
+    const species = peopleItem?.additional_info?.species;
 
     let homeID: string | number = home?.url !== undefined ? getIdFromUrl(home?.url) : "";
 

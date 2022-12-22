@@ -10,8 +10,8 @@ import getIdFromUrl from "../utils/getIdFromUrl";
 const SpecieDetailPage = () => {
     const {data, error, loading} = useAppSelector(state => state.specieDetail);
 
-    const films = data?.additional_info.films;
-    const people = data?.additional_info.people;
+    const films = data?.additional_info?.films;
+    const people = data?.additional_info?.people;
     return (
         <Main>
             <Typography variant="h3">

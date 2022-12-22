@@ -22,7 +22,7 @@ export interface SpecieType {
     people: string[],
     films: string[],
     url: string,
-    additional_info: AddSpecieInfoType
+    additional_info?: AddSpecieInfoType
 }
 
 

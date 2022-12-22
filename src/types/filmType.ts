@@ -27,7 +27,7 @@ export interface FilmType {
     characters: string[],
     planets: string[]
     url: string,
-    additional_info: FilmAddInfoType
+    additional_info?: FilmAddInfoType
 }
 
 

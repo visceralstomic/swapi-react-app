@@ -28,7 +28,7 @@ export interface PeopleType {
     starships: string[],
     url: string,
     vehicles: string[],
-    additional_info: PeopleAddInfoType
+    additional_info?: PeopleAddInfoType
 }
 
 

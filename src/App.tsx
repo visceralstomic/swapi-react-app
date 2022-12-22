@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './App.css';
 import AppRouter from './components/AppRouter';
 import Navbar from './components/Navbar';
-import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
-import { amber, deepOrange, grey, blue } from '@mui/material/colors';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { grey} from '@mui/material/colors';
 import { PaletteMode } from '@mui/material';
 
 
@@ -41,8 +41,8 @@ const getDesignTokens = (mode: PaletteMode) => ({
 function App() {
 
 
-  const [mode, setMode] = React.useState<'light' | 'dark'>('light');
-  const colorMode = React.useMemo(
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
@@ -51,7 +51,7 @@ function App() {
     [],
   );
 
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createTheme(getDesignTokens(mode)),
     [mode],

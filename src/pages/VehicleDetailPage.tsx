@@ -10,8 +10,8 @@ import getIdFromUrl from "../utils/getIdFromUrl";
 const VehicleDetailPage = () => {
     const {data, error, loading} = useAppSelector(state => state.vehicleDetail);
 
-    const films = data?.additional_info.films;
-    const pilots = data?.additional_info.pilots;
+    const films = data?.additional_info?.films;
+    const pilots = data?.additional_info?.pilots;
 
     return (
         <Main>

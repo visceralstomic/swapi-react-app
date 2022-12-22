@@ -17,13 +17,16 @@ import speciesReducer from "./reducers/speciesReducer";
 import specieDetailReducer from "./reducers/specieDetailReducer";
 
 
+
+
+
 const {createReduxHistory, routerMiddleware, routerReducer} = createReduxHistoryContext({
     history: createBrowserHistory()
 })
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
         people: peopleReducer,
         peopleDetail: peopleDetailReducer,

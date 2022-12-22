@@ -6,7 +6,7 @@ import { PeopleType } from "../types/peopleType";
 import TemplateListPage from "./TemplateLIstPage";
 
 
-const PeoplePage = () => {
+const PeoplePage: React.FC = () => {
     const {data, count, loading, error, 
         page, search, changePage, changeSearch} = useEntityData(fetchPeople, state => state.people)
     
